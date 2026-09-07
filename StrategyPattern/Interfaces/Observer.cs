@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyPattern.Interfaces.SwimBehavior
+namespace ObserverPattern.Interfaces
 {
-    internal interface SwimBehavior
+    internal interface Observer
     {
-        public void Swim();
+        void Update(float temp, float humidity, float pressure);
     }
 }

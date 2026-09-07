@@ -1,38 +1,22 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
+﻿using ObserverPattern.Displays;
+using ObserverPattern.Interfaces;
 
-namespace StrategyPattern
+namespace ObserverPattern
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            Duck redheadDuck = new RedheadDuck();
-            Duck decoyDuck = new DecoyDuck();
-            Duck rubberDuck = new RubberDuck();
-            Duck robotDuck = new RobotDuck();
+            WeatherData weatherData = new WeatherData();
 
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
+            // Create instances of displays 
+            DisplayElement currentDisplay = new CurrentConditionDisplay(weatherData);
+            DisplayElement forecastDisplay = new ForecastDisplay(weatherData);
+            DisplayElement statisticsDisplay = new StatisticsDisplay(weatherData);
 
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.Swim();
+            weatherData.SetMeasurements(28, 65, 30.4f);
+            weatherData.SetMeasurements(29, 70, 29.2f);
+            weatherData.SetMeasurements(30, 90, 29.2f);
         }
     }
 }
