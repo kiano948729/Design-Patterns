@@ -16,18 +16,22 @@ namespace StrategyPattern
             mallardDuck.Display();
             mallardDuck.PerformQuack();
             mallardDuck.PerformFly();
+            mallardDuck.Swim();
 
             redheadDuck.Display();
             redheadDuck.PerformQuack();
             redheadDuck.PerformFly();
+            redheadDuck.Swim();
 
             decoyDuck.Display();
             decoyDuck.PerformQuack();
             decoyDuck.PerformFly();
+            decoyDuck.Swim();
 
             rubberDuck.Display();
             rubberDuck.PerformQuack();
             rubberDuck.PerformFly();
+            rubberDuck.Swim();
 
             robotDuck.Display();
             robotDuck.PerformQuack();

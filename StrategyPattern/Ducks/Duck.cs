@@ -30,5 +30,17 @@ namespace StrategyPattern.Ducks
         {
             swimBehavior.Swim();
         }
+        public void SetQuackBehavior(QuackBehavior quackBehavior)
+        {
+            this.quackBehavior = quackBehavior;
+        }
+        public void SetFlyBehavior(FlyBehavior flyBehavior) 
+        { 
+            this.flyBehavior = flyBehavior; 
+        }
+        public void SetSwimBehavior(SwimBehavior swimBehavior) 
+        { 
+            this.swimBehavior = swimBehavior; 
+        }
     }
 }
