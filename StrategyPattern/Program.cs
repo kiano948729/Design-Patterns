@@ -1,42 +1,37 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
+﻿using DecoratorPattern.Beverages;
+using DecoratorPattern.Condiments;
+using StrategyPattern.Condiments;
 
-namespace StrategyPattern
+namespace DecoratorPattern
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            Duck redheadDuck = new RedheadDuck();
-            Duck decoyDuck = new DecoyDuck();
-            Duck rubberDuck = new RubberDuck();
-            Duck robotDuck = new RobotDuck();
+            Beverage espresso = new Espresso();
+            PrintBeverage(espresso);
 
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.Swim();
+            Beverage lungo = new Espresso();
+            lungo = new Water(lungo);
+            PrintBeverage(lungo);
 
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.Swim();
+            Beverage americano = new Espresso();
+            americano = new Water(americano);
+            americano = new Water(americano);
+            PrintBeverage(americano);
 
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.Swim();
+            Beverage doppio = new Espresso();
+            doppio = new Water(doppio);
+            PrintBeverage(doppio);
 
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.Swim();
+            Beverage macchiato = new Espresso();
+            macchiato = new MilkFoam(macchiato);
+            PrintBeverage(macchiato);
+        }
 
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.Swim();
+        static void PrintBeverage(Beverage beverage)
+        {
+            Console.WriteLine(beverage.GetDescription() + " $" + beverage.cost().ToString("#.##"));
         }
     }
 }
