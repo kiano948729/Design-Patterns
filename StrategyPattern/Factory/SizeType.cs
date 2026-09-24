@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyPattern.Interfaces.QuackBehavior
+namespace StrategyPattern.Factory
 {
-    internal interface QuackBehavior
+    internal enum SizeType
     {
-        public void Quack();
+        TALL,
+        GRANDE,
+        VENTI
     }
 }

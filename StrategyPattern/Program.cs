@@ -1,5 +1,6 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
+﻿using StrategyPattern.Beverages;
+using StrategyPattern.Factory;
+using System;
 
 namespace StrategyPattern
 {
@@ -7,36 +8,19 @@ namespace StrategyPattern
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            Duck redheadDuck = new RedheadDuck();
-            Duck decoyDuck = new DecoyDuck();
-            Duck rubberDuck = new RubberDuck();
-            Duck robotDuck = new RobotDuck();
+            ICoffeeFactory factory = new CoffeeFactory();
 
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.Swim();
+            Beverage tall = factory.CreateCoffee(CoffeeType.Espresso, SizeType.TALL);
+            Beverage grande = factory.CreateCoffee(CoffeeType.Espresso, SizeType.GRANDE);
+            Beverage venti = factory.CreateCoffee(CoffeeType.CaffeAffogato, SizeType.VENTI);
+            PrintBeverage(tall);
+            PrintBeverage(grande);
+            PrintBeverage(venti);
+        }
 
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.Swim();
-
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.Swim();
-
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.Swim();
-
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.Swim();
+        static void PrintBeverage(Beverage beverage)
+        {
+            Console.WriteLine(beverage.GetDescription() + "  $" + beverage.Cost().ToString());
         }
     }
 }
