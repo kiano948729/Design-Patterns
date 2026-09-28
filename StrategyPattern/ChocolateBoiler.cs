@@ -11,7 +11,8 @@ namespace StrategyPattern
         private bool empty;
         private bool boiled;
 
-        private static ChocolateBoiler instance;
+        // Eager instantiation
+        private static readonly ChocolateBoiler instance = new ChocolateBoiler();
 
         public bool IsEmpty { get { return this.empty; } }
         public bool IsBoiled { get { return this.boiled; } }
@@ -27,11 +28,6 @@ namespace StrategyPattern
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new ChocolateBoiler();
-                }
-
                 return instance;
             }
         }
