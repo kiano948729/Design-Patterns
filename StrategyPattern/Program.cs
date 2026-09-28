@@ -1,5 +1,4 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
+﻿using System;
 
 namespace StrategyPattern
 {
@@ -7,36 +6,23 @@ namespace StrategyPattern
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            Duck redheadDuck = new RedheadDuck();
-            Duck decoyDuck = new DecoyDuck();
-            Duck rubberDuck = new RubberDuck();
-            Duck robotDuck = new RobotDuck();
+            ChocolateBoiler boiler1 = ChocolateBoiler.Instance;
+            ChocolateBoiler boiler2 = ChocolateBoiler.Instance;
 
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.Swim();
+            // Controleren of het dezelfde instantie is
+            Console.WriteLine(boiler1 == boiler2);
 
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.Swim();
+            // De boiler gebruiken
+            Console.WriteLine("leeg: " + boiler1.IsEmpty);
+            boiler1.fill();
 
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.Swim();
+            Console.WriteLine("leeg na vullen: " + boiler2.IsEmpty);
+            boiler2.boil();
 
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.Swim();
+            Console.WriteLine("Boiled: " + boiler1.IsBoiled);
+            boiler1.drain();
 
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.Swim();
+            Console.WriteLine("leeg na legen: " + boiler2.IsEmpty);
         }
     }
 }
