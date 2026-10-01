@@ -25,11 +25,14 @@ namespace StrategyPattern.Beverages
 
         public override double cost()
         {
+            double price = 0.75 * ((int)Size + 1);
+
             if (baseBeverage != null)
             {
-                return 0.75 + baseBeverage.cost();
+                return price + baseBeverage.cost();
             }
-            return 0.75;
+
+            return price;
         }
     }
 }
