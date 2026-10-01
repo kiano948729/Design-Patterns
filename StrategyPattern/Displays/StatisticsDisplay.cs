@@ -9,28 +9,25 @@ namespace ObserverPattern.Displays
 {
     internal class StatisticsDisplay : Observer, DisplayElement
     {
-        private float temperature;
         private float sumTemperature = 0;
         private float maxTemp = 0;
         private float minTemp = 0;
         private int countUpdated = 0;
-        private Subject weatherData;
-        public StatisticsDisplay(Subject weatherData)
+
+        public StatisticsDisplay(Subject weatherData) : base(weatherData)
         {
-            // Set the field and register itself with the weatherdata subject
-            this.weatherData = weatherData;
-            weatherData.RegisterObserver(this);
         }
-        public void Update(float temp, float humidity, float pressure)
+
+        public override void Update(float temp, float humidity, float pressure)
         {
             // Set the correct fields with the relevant parameters
-            this.temperature = temp;
             sumTemperature += temp;
             countUpdated++;
 
             if (countUpdated == 1)
             {
-                maxTemp = temp; minTemp = temp;
+                maxTemp = temp;
+                minTemp = temp;
             }
             else
             {

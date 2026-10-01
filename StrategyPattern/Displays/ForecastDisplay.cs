@@ -13,28 +13,20 @@ namespace ObserverPattern.Displays
         private float humidity;
         private float pressure;
         private bool statusWeather;
-        private Subject weatherData;
-        public ForecastDisplay(Subject weatherData) 
-        { 
-            // Set the field and register itself with the weatherdata subject
-            this.weatherData = weatherData;
-            weatherData.RegisterObserver(this);
+
+        public ForecastDisplay(Subject weatherData) : base(weatherData)
+        {
         }
-        public void Update(float temp, float humidity, float pressure)
+
+        public override void Update(float temp, float humidity, float pressure)
         {
             // Set the correct fields with the relevant parameters
             this.temperature = temp;
             this.humidity = humidity;
             this.pressure = pressure;
-            if (temperature > 16)
-            {
-                statusWeather = true;
 
-            }
-            else
-            {
-                statusWeather = false;
-            }
+            statusWeather = temperature > 16;
+
             Display();
         }
 

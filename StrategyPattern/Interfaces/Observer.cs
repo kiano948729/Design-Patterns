@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace ObserverPattern.Interfaces
 {
-    internal interface Observer
+    internal abstract class Observer
     {
-        void Update(float temp, float humidity, float pressure);
+        protected Subject weatherData;
+
+        protected Observer(Subject weatherData)
+        {
+            this.weatherData = weatherData;
+            weatherData.RegisterObserver(this);
+        }
+
+        public abstract void Update(float temp, float humidity, float pressure);
     }
 }
