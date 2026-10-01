@@ -10,17 +10,20 @@ namespace StrategyPattern
         {
             ICoffeeFactory factory = new CoffeeFactory();
 
-            Beverage tall = factory.CreateCoffee(CoffeeType.Espresso, SizeType.TALL);
-            Beverage grande = factory.CreateCoffee(CoffeeType.Espresso, SizeType.GRANDE);
-            Beverage venti = factory.CreateCoffee(CoffeeType.CaffeAffogato, SizeType.VENTI);
-            PrintBeverage(tall);
-            PrintBeverage(grande);
-            PrintBeverage(venti);
-        }
+            Beverage tall = factory.OrderDrink(
+                CoffeeType.Espresso,
+                SizeType.TALL
+            );
 
-        static void PrintBeverage(Beverage beverage)
-        {
-            Console.WriteLine(beverage.GetDescription() + "  $" + beverage.Cost().ToString());
+            Beverage grande = factory.OrderDrink(
+                CoffeeType.Espresso,
+                SizeType.GRANDE
+            );
+
+            Beverage venti = factory.OrderDrink(
+                CoffeeType.CaffeAffogato,
+                SizeType.VENTI
+            );
         }
     }
 }

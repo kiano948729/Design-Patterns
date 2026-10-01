@@ -5,7 +5,16 @@ namespace StrategyPattern.Factory
 {
     internal class CoffeeFactory : ICoffeeFactory
     {
-        public Beverage CreateCoffee(CoffeeType type, SizeType size)
+        public Beverage OrderDrink(CoffeeType type, SizeType size)
+        {
+            Beverage beverage = CreateCoffee(type, size);
+
+            PrintBeverage(beverage);
+
+            return beverage;
+        }
+
+        private Beverage CreateCoffee(CoffeeType type, SizeType size)
         {
             Coffee coffee;
 
@@ -206,6 +215,10 @@ namespace StrategyPattern.Factory
             }
 
             return coffee;
+        }
+        private void PrintBeverage(Beverage beverage)
+        {
+            Console.WriteLine(beverage.GetDescription() + " $" + beverage.Cost().ToString());
         }
     }
 }

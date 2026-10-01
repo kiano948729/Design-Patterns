@@ -9,6 +9,6 @@ namespace StrategyPattern.Factory
 {
     internal interface ICoffeeFactory
     {
-        Beverage CreateCoffee(CoffeeType type, SizeType size);
+        Beverage OrderDrink(CoffeeType type, SizeType size);
     }
 }
