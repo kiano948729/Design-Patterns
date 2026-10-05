@@ -1,42 +1,32 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
-
-namespace StrategyPattern
+﻿namespace StrategyPattern
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            Duck redheadDuck = new RedheadDuck();
-            Duck decoyDuck = new DecoyDuck();
-            Duck rubberDuck = new RubberDuck();
-            Duck robotDuck = new RobotDuck();
+            Amplifier amp = new Amplifier();
+            CdPlayer cdPlayer = new CdPlayer(amp);
+            DvdPlayer dvdPlayer = new DvdPlayer(amp);
+            PopcornPopper popcornPopper = new PopcornPopper();
+            Projector projector = new Projector();
+            Screen screen = new Screen();
+            TheaterLights lights = new TheaterLights();
+            Tuner tuner = new Tuner(amp);
 
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.Swim();
+            HomeTheaterFacade homeTheater = new HomeTheaterFacade(
+                amp,
+                dvdPlayer,
+                cdPlayer,
+                popcornPopper,
+                projector,
+                screen,
+                lights,
+                tuner);
 
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.Swim();
+            homeTheater.WatchMovie("john wick");
 
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.Swim();
-
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.Swim();
-
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.Swim();
+            //voor het stoppen van de film
+            homeTheater.EndMovie();
         }
     }
 }
