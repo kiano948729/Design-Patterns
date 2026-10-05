@@ -73,5 +73,32 @@
 
             _popcornPopper.Off();
         }
+
+        public void ListenToCd(string cdTitle)
+        {
+            Console.WriteLine("Klaar voor een audiophile ervaring");
+            _lights.On();
+            _amp.On();
+            _amp.SetCd(_cdPlayer);
+            _amp.SetStereoSound();
+            _amp.SetVolume(5);
+            _cdPlayer.On();
+        }
+        public void ListenToRadio(double frequency)
+        {
+            Console.WriteLine("Luisteren op de radio");
+            _tuner.On();
+            _tuner.setFrequency();
+            _amp.On();
+            _amp.SetTuner(_tuner);
+            _amp.SetVolume(5);
+        }
+        public void EndCd()
+        {
+            Console.WriteLine("CD afsluiten");
+            _amp.Off();
+            _cdPlayer.Eject();
+            _cdPlayer.Off();
+        }
     }
 }
