@@ -1,0 +1,30 @@
+﻿using StrategyPattern.Classes;
+using StrategyPattern.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StrategyPattern.Classes.Commands
+{
+    internal class StereoOnWithDvdCommand : Command
+    {
+        Stereo stereo;
+        public StereoOnWithDvdCommand(Stereo stereo)
+        {
+            this.stereo = stereo;
+        }
+        public void Execute()
+        {
+            stereo.On();
+            stereo.SetDVD();
+            stereo.SetVolume(11);
+        }
+
+        public void Undo()
+        {
+            stereo.Off();
+        }
+    }
+}

@@ -1,5 +1,6 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
+﻿using StrategyPattern.Classes;
+using StrategyPattern.Classes.Commands;
+using StrategyPattern.Interfaces;
 
 namespace StrategyPattern
 {
@@ -7,36 +8,59 @@ namespace StrategyPattern
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            Duck redheadDuck = new RedheadDuck();
-            Duck decoyDuck = new DecoyDuck();
-            Duck rubberDuck = new RubberDuck();
-            Duck robotDuck = new RobotDuck();
+            RemoteControl remoteControl = new RemoteControl();
 
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.Swim();
+            Light kitchenLight = new Light("Kitchen");
+            Light livingRoomLight = new Light("Living Room");
+            CeilingFan ceilingFan = new CeilingFan("Living Room Ceiling Fan");
+            GarageDoor garageDoor = new GarageDoor(new Light("Garage"));
+            Stereo stereo = new Stereo();
 
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.Swim();
+            remoteControl.SetCommand(1, new LightOnCommand(livingRoomLight), new LightOffCommand(livingRoomLight));
+            remoteControl.SetCommand(2, new LightOnCommand(kitchenLight), new LightOffCommand(kitchenLight));
+            remoteControl.SetCommand(3, new CeilingFanHighCommand(ceilingFan), new CeilingFanOffCommand(ceilingFan));
+            remoteControl.SetCommand(4, new GarageDoorUpCommand(garageDoor), new GarageDoorDownCommand(garageDoor));
+            remoteControl.SetCommand(5, new StereoOnWithCdCommand(stereo), new StereoOffCommand(stereo));
 
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.Swim();
+            Console.WriteLine(remoteControl);
 
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.Swim();
+            Console.WriteLine("Living room light: on, off, undo, undo");
+            remoteControl.OnButtonWasPushed(1);   
+            remoteControl.OffButtonWasPushed(1);  
+            remoteControl.UndoButtonWasPushed();  
+            remoteControl.UndoButtonWasPushed();  
 
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.Swim();
+            Console.WriteLine("Ceiling fan: high, off, undo, undo");
+            remoteControl.OnButtonWasPushed(3);   
+            remoteControl.OffButtonWasPushed(3);  
+            remoteControl.UndoButtonWasPushed();  
+            remoteControl.UndoButtonWasPushed();  
+
+            Console.WriteLine("Garage door: up, undo");
+            remoteControl.OnButtonWasPushed(4);   
+            remoteControl.UndoButtonWasPushed();  
+
+            Console.WriteLine("Stereo: on with CD, undo");
+            remoteControl.OnButtonWasPushed(5);   
+            remoteControl.UndoButtonWasPushed();  
+
+            Console.WriteLine("History: kitchen on, fan high, garage up, dan 3x undo");
+            remoteControl.OnButtonWasPushed(2);
+            remoteControl.OnButtonWasPushed(3);
+            remoteControl.OnButtonWasPushed(4);
+            remoteControl.UndoButtonWasPushed();  
+            remoteControl.UndoButtonWasPushed();  
+            remoteControl.UndoButtonWasPushed();  
+
+            Console.WriteLine("Undo op lege history");
+            remoteControl.UndoButtonWasPushed();  
+
+            Console.WriteLine("Macro: licht + stereo aan, undo");
+            Command[] partyOn = { new LightOnCommand(livingRoomLight), new StereoOnWithCdCommand(stereo) };
+            Command[] partyOff = { new LightOffCommand(livingRoomLight), new StereoOffCommand(stereo) };
+            remoteControl.SetCommand(6, new MacroCommand(partyOn), new MacroCommand(partyOff));
+            remoteControl.OnButtonWasPushed(6);   
+            remoteControl.UndoButtonWasPushed();  
         }
     }
 }
