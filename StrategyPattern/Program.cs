@@ -1,42 +1,61 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
-
+﻿using StrategyPattern.Beverage.AbstractedBeverages;
+using StrategyPattern.Beverage.SimpleBeverages;
+using StrategyPattern.Sorting;
 namespace StrategyPattern
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            Duck redheadDuck = new RedheadDuck();
-            Duck decoyDuck = new DecoyDuck();
-            Duck rubberDuck = new RubberDuck();
-            Duck robotDuck = new RobotDuck();
+            SimpleTea simpleTea = new SimpleTea();
+            SimpleCoffee simpleCoffee = new SimpleCoffee();
 
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.Swim();
+            simpleTea.prepareRecipe();
+            simpleCoffee.PrepareRecipe();
+            
+            Console.WriteLine("\n\nNow with abstracted classes\n\n");
 
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.Swim();
+            CaffeineBeverage tea = new Tea();
+            CaffeineBeverage coffee = new Coffee();
 
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.Swim();
+            tea.PrepareRecipe();
+            coffee.PrepareRecipe();
 
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.Swim();
+            Console.WriteLine("\n\n Now with hooked classes\n\n");
 
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.Swim();
+            // You'll need this method for the second part of the Template Method Pattern
+            Duck[] ducks =
+            {
+                new Duck("Daffy", 8),
+                new Duck("Dewey", 2),
+                new Duck("Howard", 7),
+                new Duck("Louie", 2),
+                new Duck("Donald", 10),
+                new Duck("Huey", 2)
+            };
+
+            Console.WriteLine("Before sorting:");
+            Display(ducks);
+
+            Array.Sort(ducks);
+    
+            Console.WriteLine("\nAfter sorting:");
+            Display(ducks);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        // You'll need this method for the second part of the Template Method Pattern
+        public static void Display(object[] objects)
+        {
+            foreach (object o in objects)
+            {
+                Console.WriteLine(o.ToString());
+            }
+            Console.WriteLine("");
         }
     }
 }
